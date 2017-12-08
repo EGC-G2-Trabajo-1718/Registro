@@ -1,80 +1,80 @@
 <?php
 
-function sendMessageSlack($idRegistration){
-    $aRegistrationInfo = get_registration_info($idRegistration);
-    $email = $aRegistrationInfo["email"];
-    $aAll = get_all_registrations(false, false, false);
-    $aTotalRegistered = 0;
-    $aUsersRepeated = array();
-    $cancel = false;
-    foreach($aAll as $user){
-      if(strtolower($email) == strtolower($user["email"]) && $idRegistration!=$user["id"]) $cancel = true; 
-      if ($user["paymentdone"]==1){
-        $aTotalRegistered++;
-        $aUsersRepeated[strtolower($user["email"])] = 1;
-      }
-    }
-    foreach($aAll as $user){
-      if ($user["paymentdone"]==0){
-        if (!isset($aUsersRepeated[strtolower($user["email"])])){
-          $aUsersRepeated[strtolower($user["email"])] = 1;     
-          $aTotalRegistered++;
-        }
-      }
-    }
-    if (!$cancel){
-      $number = $aTotalRegistered;
-      $domain   = get_option('splcregistration_settings_input')["slackchannel"];
-
-      $bot_name = 'Webhook';
-      $icon     = ':alien:';
-      $messageInit = "";
-      
-      if($aRegistrationInfo["affiliation"]!=""){
-        $prestigious = array("famous", "renowned", "accredited", "influential", "notorious", "considered", "respected", "appreciated", "well-liked");
-        $random = rand(0,count($prestigious)-1);
-        $messageInit = "A new user from the ".$prestigious[$random]." ".$aRegistrationInfo["affiliation"]." has registered. ";
-      }else $messageInit = "A new user has registered. ";
-      $messages = array("#number registered users and going up! :metal:",
-                        "We are already #number! :smiley:",
-                      "SPLC is proud to announce that there are #number registered users :thumbsup:");
-
-      $specialMessages  = array(100=> "WOW!!!! We reached 100! :trophy:", 144 => "We are a dozen of dozens! Will be surprises at the party? :ring:");
-      $specialEmails    = array("jtroya@us.es" => "Made in Costa del Sol and evolved in London, Canada and Vienna.", 
-                                "jagalindo@us.es" => "Tostadas completas lover and Dos Hermanas resident.", 
-                                "anabsanchez@us.es" => "Carlinhos lover, rosaleña and half-trianera.",
-                                "aruiz@us.es" => "<https://www.youtube.com/watch?v=xemgC81-5Uo|The boss> has come!");
-      $endMessage = $messageInit;
-      if (isset($specialMessages[$number])) $endMessage .= $specialMessages[$number];
-      else if (isset($specialEmails[strtolower($aRegistrationInfo["email"])])) $endMessage .= $specialEmails[strtolower($aRegistrationInfo["email"])];
-      else {
-          $random = rand(0,count($messages)-1);
-          $endMessage .= str_replace("#number", $number, $messages[$random]);
-      }
-      $data = array(
-          'channel'     => $channel,
-          'username'    => $bot_name,
-          'text'        => $endMessage,
-          'icon_emoji'  => $icon
-      );
-      $data_string = json_encode($data);
-      $ch = curl_init($domain);
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-          'Content-Type: application/json',
-          'Content-Length: ' . strlen($data_string))
-      );
-
-      $result = curl_exec($ch);
-      if ($result === false) {
-         // echo 'Curl error: ' . curl_error($ch);
-      }
-      curl_close($ch);
-    }
-    return $result;
-}
+// function sendMessageSlack($idRegistration){
+    // $aRegistrationInfo = get_registration_info($idRegistration);
+    // $email = $aRegistrationInfo["email"];
+    // $aAll = get_all_registrations(false, false, false);
+    // $aTotalRegistered = 0;
+    // $aUsersRepeated = array();
+    // $cancel = false;
+    // foreach($aAll as $user){
+      // if(strtolower($email) == strtolower($user["email"]) && $idRegistration!=$user["id"]) $cancel = true; 
+      // if ($user["paymentdone"]==1){
+        // $aTotalRegistered++;
+        // $aUsersRepeated[strtolower($user["email"])] = 1;
+      // }
+    // }
+    // foreach($aAll as $user){
+      // if ($user["paymentdone"]==0){
+        // if (!isset($aUsersRepeated[strtolower($user["email"])])){
+          // $aUsersRepeated[strtolower($user["email"])] = 1;     
+          // $aTotalRegistered++;
+        // }
+      // }
+    // }
+    // if (!$cancel){
+      // $number = $aTotalRegistered;
+      // $domain   = get_option('splcregistration_settings_input')["slackchannel"];
+// 
+      // $bot_name = 'Webhook';
+      // $icon     = ':alien:';
+      // $messageInit = "";
+//       
+      // if($aRegistrationInfo["affiliation"]!=""){
+        // $prestigious = array("famous", "renowned", "accredited", "influential", "notorious", "considered", "respected", "appreciated", "well-liked");
+        // $random = rand(0,count($prestigious)-1);
+        // $messageInit = "A new user from the ".$prestigious[$random]." ".$aRegistrationInfo["affiliation"]." has registered. ";
+      // }else $messageInit = "A new user has registered. ";
+      // $messages = array("#number registered users and going up! :metal:",
+                        // "We are already #number! :smiley:",
+                      // "SPLC is proud to announce that there are #number registered users :thumbsup:");
+// 
+      // $specialMessages  = array(100=> "WOW!!!! We reached 100! :trophy:", 144 => "We are a dozen of dozens! Will be surprises at the party? :ring:");
+      // $specialEmails    = array("jtroya@us.es" => "Made in Costa del Sol and evolved in London, Canada and Vienna.", 
+                                // "jagalindo@us.es" => "Tostadas completas lover and Dos Hermanas resident.", 
+                                // "anabsanchez@us.es" => "Carlinhos lover, rosaleña and half-trianera.",
+                                // "aruiz@us.es" => "<https://www.youtube.com/watch?v=xemgC81-5Uo|The boss> has come!");
+      // $endMessage = $messageInit;
+      // if (isset($specialMessages[$number])) $endMessage .= $specialMessages[$number];
+      // else if (isset($specialEmails[strtolower($aRegistrationInfo["email"])])) $endMessage .= $specialEmails[strtolower($aRegistrationInfo["email"])];
+      // else {
+          // $random = rand(0,count($messages)-1);
+          // $endMessage .= str_replace("#number", $number, $messages[$random]);
+      // }
+      // $data = array(
+          // 'channel'     => $channel,
+          // 'username'    => $bot_name,
+          // 'text'        => $endMessage,
+          // 'icon_emoji'  => $icon
+      // );
+      // $data_string = json_encode($data);
+      // $ch = curl_init($domain);
+      // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+      // curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+      // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      // curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+          // 'Content-Type: application/json',
+          // 'Content-Length: ' . strlen($data_string))
+      // );
+// 
+      // $result = curl_exec($ch);
+      // if ($result === false) {
+         // // echo 'Curl error: ' . curl_error($ch);
+      // }
+      // curl_close($ch);
+    // }
+    // return $result;
+// }
 
 function getCheckCodeByEmail($email){
   $code   = hash("md5",$email."splc1");   
@@ -141,256 +141,256 @@ function processActionUsers(){
     }
 }
 
-function generateExcelSummaryCountries(){
-  $aUsers = exportUsers();
-  $aSummary = array();
-  $aContinents = array();
-  foreach($aUsers as $aUser){
-    $sContinent = getContinent($aUser["country"]);
-    if (isset($aSummary[$aUser["country"]]))
-      $aSummary[$aUser["country"]]++;
-    else $aSummary[$aUser["country"]] = 1;
+// function generateExcelSummaryCountries(){
+  // $aUsers = exportUsers();
+  // $aSummary = array();
+  // $aContinents = array();
+  // foreach($aUsers as $aUser){
+    // $sContinent = getContinent($aUser["country"]);
+    // if (isset($aSummary[$aUser["country"]]))
+      // $aSummary[$aUser["country"]]++;
+    // else $aSummary[$aUser["country"]] = 1;
+// 
+    // if (isset($aContinents[$sContinent]))
+      // $aContinents[$sContinent]++;
+    // else $aContinents[$sContinent] = 1;
+  // }
+//   
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
+//   
+  // //require_once 'PhpSpreadsheet/Bootstrap.php';
+//   
+  // $spreadsheet = new PHPExcel();
+  // // Set document properties
+  // $spreadsheet->getProperties()->setCreator('SPLC2017')
+          // ->setLastModifiedBy('SPLC2017')
+          // ->setTitle('SPLC 2017 Countries Summary')
+          // ->setSubject('SPLC 2017 Countries Summary')
+          // ->setDescription('Count of registered users by country in SPLC 2017')
+          // ->setKeywords('splc conference')
+          // ->setCategory('SPLC');
+  // // Add some data
+  // $spreadsheet->setActiveSheetIndex(0)
+            // ->setCellValue('A1',"Country")
+            // ->setCellValue('B1',"Attendance")
+            // ->setCellValue('E1',"Continent")
+            // ->setCellValue('F1',"Attendance");
+//       
+  // $spreadsheet->getActiveSheet()->setTitle('Registration');
+  // // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+  // $spreadsheet->setActiveSheetIndex(0);
+  // $currentRow = 2;
+  // foreach($aSummary as $key=>$count){
+    // $spreadsheet->getActiveSheet()
+      // ->setCellValue('A'.$currentRow,resultCountry($key))
+      // ->setCellValue('B'.$currentRow,$count);   
+    // $currentRow++;
+  // }
+// 
+  // $currentRow = 2;
+  // foreach($aContinents as $key=>$count){
+    // $spreadsheet->getActiveSheet()
+      // ->setCellValue('E'.$currentRow,$key)
+      // ->setCellValue('F'.$currentRow,$count);   
+    // $currentRow++;
+  // }
+// 
+  // // Redirect output to a client’s web browser (Xlsx)
+  // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  // header('Content-Disposition: attachment;filename="CountriesSummary.xlsx"');
+  // header('Cache-Control: max-age=0');
+  // // If you're serving to IE 9, then the following may be needed
+  // header('Cache-Control: max-age=1');
+// // If you're serving to IE over SSL, then the following may be needed
+  // header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+  // header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+  // header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+  // header ('Pragma: public'); // HTTP/1.0
+  // $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+  // $fileNameTmp = str_replace('.php', '.xlsx', __FILE__);
+  // $objWriter->save($fileNameTmp);
+  // readfile($fileNameTmp);
+  // exit;
+// }
 
-    if (isset($aContinents[$sContinent]))
-      $aContinents[$sContinent]++;
-    else $aContinents[$sContinent] = 1;
-  }
-  
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
-  
-  //require_once 'PhpSpreadsheet/Bootstrap.php';
-  
-  $spreadsheet = new PHPExcel();
-  // Set document properties
-  $spreadsheet->getProperties()->setCreator('SPLC2017')
-          ->setLastModifiedBy('SPLC2017')
-          ->setTitle('SPLC 2017 Countries Summary')
-          ->setSubject('SPLC 2017 Countries Summary')
-          ->setDescription('Count of registered users by country in SPLC 2017')
-          ->setKeywords('splc conference')
-          ->setCategory('SPLC');
-  // Add some data
-  $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1',"Country")
-            ->setCellValue('B1',"Attendance")
-            ->setCellValue('E1',"Continent")
-            ->setCellValue('F1',"Attendance");
-      
-  $spreadsheet->getActiveSheet()->setTitle('Registration');
-  // Set active sheet index to the first sheet, so Excel opens this as the first sheet
-  $spreadsheet->setActiveSheetIndex(0);
-  $currentRow = 2;
-  foreach($aSummary as $key=>$count){
-    $spreadsheet->getActiveSheet()
-      ->setCellValue('A'.$currentRow,resultCountry($key))
-      ->setCellValue('B'.$currentRow,$count);   
-    $currentRow++;
-  }
-
-  $currentRow = 2;
-  foreach($aContinents as $key=>$count){
-    $spreadsheet->getActiveSheet()
-      ->setCellValue('E'.$currentRow,$key)
-      ->setCellValue('F'.$currentRow,$count);   
-    $currentRow++;
-  }
-
-  // Redirect output to a client’s web browser (Xlsx)
-  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  header('Content-Disposition: attachment;filename="CountriesSummary.xlsx"');
-  header('Cache-Control: max-age=0');
-  // If you're serving to IE 9, then the following may be needed
-  header('Cache-Control: max-age=1');
-// If you're serving to IE over SSL, then the following may be needed
-  header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-  header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-  header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-  header ('Pragma: public'); // HTTP/1.0
-  $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
-  $fileNameTmp = str_replace('.php', '.xlsx', __FILE__);
-  $objWriter->save($fileNameTmp);
-  readfile($fileNameTmp);
-  exit;
-}
-
-function generateExcelSummaryPrivate(){
-  $aUsers = exportUsers();
-  $aSummary = array();
-  foreach($aUsers as $aUser){
-    $private = "public";
-    if ($aUser["privatepublic"]!="0")
-      $private = "private";
-    if (isset($aSummary[$private]))
-      $aSummary[$private]++;
-    else $aSummary[$private] = 1;
-
-  }
-  
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
-  
-  //require_once 'PhpSpreadsheet/Bootstrap.php';
-  
-  $spreadsheet = new PHPExcel();
-  // Set document properties
-  $spreadsheet->getProperties()->setCreator('SPLC2017')
-          ->setLastModifiedBy('SPLC2017')
-          ->setTitle('SPLC 2017 Public or Private Summary')
-          ->setSubject('SPLC 2017 Public or Private')
-          ->setDescription('Count of registered users by Public or Private in SPLC 2017')
-          ->setKeywords('splc conference')
-          ->setCategory('SPLC');
-  // Add some data
-  $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1',"Kind")
-            ->setCellValue('B1',"Attendance");
-      
-  $spreadsheet->getActiveSheet()->setTitle('Registration');
-  // Set active sheet index to the first sheet, so Excel opens this as the first sheet
-  $spreadsheet->setActiveSheetIndex(0);
-  $currentRow = 2;
-  foreach($aSummary as $key=>$count){
-    $spreadsheet->getActiveSheet()
-      ->setCellValue('A'.$currentRow,$key)
-      ->setCellValue('B'.$currentRow,$count);   
-    $currentRow++;
-  }
-
- 
-  // Redirect output to a client’s web browser (Xlsx)
-  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  header('Content-Disposition: attachment;filename="PrivateSummary.xlsx"');
-  header('Cache-Control: max-age=0');
-  // If you're serving to IE 9, then the following may be needed
-  header('Cache-Control: max-age=1');
-// If you're serving to IE over SSL, then the following may be needed
-  header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-  header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-  header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-  header ('Pragma: public'); // HTTP/1.0
-  $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
-  $fileNameTmp = str_replace('.php', '.xlsx', __FILE__);
-  $objWriter->save($fileNameTmp);
-  readfile($fileNameTmp);
-  exit;
-}
-
-
-function downloadExcel(){
-  //use PhpSpreadsheet\PhpSpreadsheet\Helper\Sample;
-  //use PhpSpreadsheet\PhpSpreadsheet\IOFactory;
-  //use PhpOffice\PhpSpreadsheet\Spreadsheet;
-  //use PhpOffice\PhpSpreadsheet\Spreadsheet;
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
-  require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
-  
-  //require_once 'PhpSpreadsheet/Bootstrap.php';
-  
-  $spreadsheet = new PHPExcel();
-  // Set document properties
-  $spreadsheet->getProperties()->setCreator('SPLC2017')
-          ->setLastModifiedBy('SPLC2017')
-          ->setTitle('SPLC 2017 Registration Info')
-          ->setSubject('SPLC 2017 Registration Info')
-          ->setDescription('List of registered users in SPLC 2017')
-          ->setKeywords('splc conference')
-          ->setCategory('SPLC');
-  // Add some data
-  $spreadsheet->setActiveSheetIndex(0)
-            ->setCellValue('A1',"REGISTRO")
-            ->setCellValue('B1',"SITUACION")
-            ->setCellValue('C1',"APELLIDO - NOMBRE")
-            ->setCellValue('D1',"BADGE NAME")
-            ->setCellValue('E1',"affiliation")
-            ->setCellValue('F1',"TIPO INSCRIPCION")
-            ->setCellValue('G1',"EMAIL")
-            ->setCellValue('H1',"FECHA DE SOLICITUD")
-            ->setCellValue('I1',"IMPORTE INSCRIPCION")
-            ->setCellValue('J1',"EASY CHAIR ID")
-            ->setCellValue('K1',"EXTRA DINNER")
-            ->setCellValue('M1',"IMPORTE EXTRA DINNER")
-            ->setCelLValue('N1',"FECHA REGISTRO");
-  $aFieldsName = array("firstname", "lastname","profile","address","postcode","city","state","country",
-                "phone","email","others","arrivaldate","departuredate","studentcheck","firsttime","paymentmethod",
-                "billingname","billingvat","billingaddress","billingpostcode","billingcity","billingstate","billingcountry",
-                "needvisa");
-  
-  $spreadsheet->getActiveSheet()
-    ->fromArray(
-        $aFieldsName ,  // The data to set
-        NULL,        // Array values with this value will not be set
-        'O1'         // Top left coordinate of the worksheet range where
-                     //    we want to set these values (default is A1)
-    );
-    
-
-  // Rename worksheet
-  $aUsers = array();
-  $aUsers = exportUsers();
-  //print_r($aUsers);
-  $initRow = 2;
-  foreach($aUsers as $aUser){
-    $spreadsheet->getActiveSheet()
-    ->fromArray(
-        $aUser,  // The data to set
-        NULL,        // Array values with this value will not be set
-        'A'.$initRow         // Top left coordinate of the worksheet range where
-                     //    we want to set these values (default is A1)
-    );
-    $initRow++;
-  }
-  $spreadsheet->getActiveSheet()->setTitle('Registration');
-  // Set active sheet index to the first sheet, so Excel opens this as the first sheet
-  $spreadsheet->setActiveSheetIndex(0);
-  $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
-  $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
-  $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(30);
-  $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(35);
-  $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(50);
-  $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(20);
-  $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(30);
-  $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
-  $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(5);
-  $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(3);
-  $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(4);
+// function generateExcelSummaryPrivate(){
+  // $aUsers = exportUsers();
+  // $aSummary = array();
+  // foreach($aUsers as $aUser){
+    // $private = "public";
+    // if ($aUser["privatepublic"]!="0")
+      // $private = "private";
+    // if (isset($aSummary[$private]))
+      // $aSummary[$private]++;
+    // else $aSummary[$private] = 1;
+// 
+  // }
+//   
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
+//   
+  // //require_once 'PhpSpreadsheet/Bootstrap.php';
+//   
+  // $spreadsheet = new PHPExcel();
+  // // Set document properties
+  // $spreadsheet->getProperties()->setCreator('SPLC2017')
+          // ->setLastModifiedBy('SPLC2017')
+          // ->setTitle('SPLC 2017 Public or Private Summary')
+          // ->setSubject('SPLC 2017 Public or Private')
+          // ->setDescription('Count of registered users by Public or Private in SPLC 2017')
+          // ->setKeywords('splc conference')
+          // ->setCategory('SPLC');
+  // // Add some data
+  // $spreadsheet->setActiveSheetIndex(0)
+            // ->setCellValue('A1',"Kind")
+            // ->setCellValue('B1',"Attendance");
+//       
+  // $spreadsheet->getActiveSheet()->setTitle('Registration');
+  // // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+  // $spreadsheet->setActiveSheetIndex(0);
+  // $currentRow = 2;
+  // foreach($aSummary as $key=>$count){
+    // $spreadsheet->getActiveSheet()
+      // ->setCellValue('A'.$currentRow,$key)
+      // ->setCellValue('B'.$currentRow,$count);   
+    // $currentRow++;
+  // }
+// 
+//  
+  // // Redirect output to a client’s web browser (Xlsx)
+  // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  // header('Content-Disposition: attachment;filename="PrivateSummary.xlsx"');
+  // header('Cache-Control: max-age=0');
+  // // If you're serving to IE 9, then the following may be needed
+  // header('Cache-Control: max-age=1');
+// // If you're serving to IE over SSL, then the following may be needed
+  // header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+  // header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+  // header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+  // header ('Pragma: public'); // HTTP/1.0
+  // $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+  // $fileNameTmp = str_replace('.php', '.xlsx', __FILE__);
+  // $objWriter->save($fileNameTmp);
+  // readfile($fileNameTmp);
+  // exit;
+// }
 
 
-  // Redirect output to a client’s web browser (Xlsx)
-  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-  header('Content-Disposition: attachment;filename="01simple.xlsx"');
-  header('Cache-Control: max-age=0');
-  // If you're serving to IE 9, then the following may be needed
-  header('Cache-Control: max-age=1');
-// If you're serving to IE over SSL, then the following may be needed
-  header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-  header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
-  header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-  header ('Pragma: public'); // HTTP/1.0
-  $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
-  $fileNameTmp = str_replace('.php', '-1.xlsx', __FILE__);
-  $objWriter->save($fileNameTmp);
-  readfile($fileNameTmp);
-  exit;
-}
+// function downloadExcel(){
+  // //use PhpSpreadsheet\PhpSpreadsheet\Helper\Sample;
+  // //use PhpSpreadsheet\PhpSpreadsheet\IOFactory;
+  // //use PhpOffice\PhpSpreadsheet\Spreadsheet;
+  // //use PhpOffice\PhpSpreadsheet\Spreadsheet;
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel.php';
+  // require_once dirname(__FILE__) . '/PhpExcel/Classes/PHPExcel/Writer/Excel2007.php';
+//   
+  // //require_once 'PhpSpreadsheet/Bootstrap.php';
+//   
+  // $spreadsheet = new PHPExcel();
+  // // Set document properties
+  // $spreadsheet->getProperties()->setCreator('SPLC2017')
+          // ->setLastModifiedBy('SPLC2017')
+          // ->setTitle('SPLC 2017 Registration Info')
+          // ->setSubject('SPLC 2017 Registration Info')
+          // ->setDescription('List of registered users in SPLC 2017')
+          // ->setKeywords('splc conference')
+          // ->setCategory('SPLC');
+  // // Add some data
+  // $spreadsheet->setActiveSheetIndex(0)
+            // ->setCellValue('A1',"REGISTRO")
+            // ->setCellValue('B1',"SITUACION")
+            // ->setCellValue('C1',"APELLIDO - NOMBRE")
+            // ->setCellValue('D1',"BADGE NAME")
+            // ->setCellValue('E1',"affiliation")
+            // ->setCellValue('F1',"TIPO INSCRIPCION")
+            // ->setCellValue('G1',"EMAIL")
+            // ->setCellValue('H1',"FECHA DE SOLICITUD")
+            // ->setCellValue('I1',"IMPORTE INSCRIPCION")
+            // ->setCellValue('J1',"EASY CHAIR ID")
+            // ->setCellValue('K1',"EXTRA DINNER")
+            // ->setCellValue('M1',"IMPORTE EXTRA DINNER")
+            // ->setCelLValue('N1',"FECHA REGISTRO");
+  // $aFieldsName = array("firstname", "lastname","profile","address","postcode","city","state","country",
+                // "phone","email","others","arrivaldate","departuredate","studentcheck","firsttime","paymentmethod",
+                // "billingname","billingvat","billingaddress","billingpostcode","billingcity","billingstate","billingcountry",
+                // "needvisa");
+//   
+  // $spreadsheet->getActiveSheet()
+    // ->fromArray(
+        // $aFieldsName ,  // The data to set
+        // NULL,        // Array values with this value will not be set
+        // 'O1'         // Top left coordinate of the worksheet range where
+                     // //    we want to set these values (default is A1)
+    // );
+//     
+// 
+  // // Rename worksheet
+  // $aUsers = array();
+  // $aUsers = exportUsers();
+  // //print_r($aUsers);
+  // $initRow = 2;
+  // foreach($aUsers as $aUser){
+    // $spreadsheet->getActiveSheet()
+    // ->fromArray(
+        // $aUser,  // The data to set
+        // NULL,        // Array values with this value will not be set
+        // 'A'.$initRow         // Top left coordinate of the worksheet range where
+                     // //    we want to set these values (default is A1)
+    // );
+    // $initRow++;
+  // }
+  // $spreadsheet->getActiveSheet()->setTitle('Registration');
+  // // Set active sheet index to the first sheet, so Excel opens this as the first sheet
+  // $spreadsheet->setActiveSheetIndex(0);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(5);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('B')->setWidth(18);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('D')->setWidth(35);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('E')->setWidth(50);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('F')->setWidth(20);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('G')->setWidth(30);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('H')->setWidth(15);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('I')->setWidth(5);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('J')->setWidth(3);
+  // $spreadsheet->getActiveSheet()->getColumnDimension('K')->setWidth(4);
+// 
+// 
+  // // Redirect output to a client’s web browser (Xlsx)
+  // header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  // header('Content-Disposition: attachment;filename="01simple.xlsx"');
+  // header('Cache-Control: max-age=0');
+  // // If you're serving to IE 9, then the following may be needed
+  // header('Cache-Control: max-age=1');
+// // If you're serving to IE over SSL, then the following may be needed
+  // header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+  // header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+  // header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+  // header ('Pragma: public'); // HTTP/1.0
+  // $objWriter = PHPExcel_IOFactory::createWriter($spreadsheet, 'Excel2007');
+  // $fileNameTmp = str_replace('.php', '-1.xlsx', __FILE__);
+  // $objWriter->save($fileNameTmp);
+  // readfile($fileNameTmp);
+  // exit;
+// }
 
-function downloadCSV(){
-  header('Content-Description: File Transfer');
-  header('Content-Type: text/csv');
-  header('Content-Disposition: attachment; filename="listadosplc.csv"');
-  // Send Headers: Prevent Caching of File
-  header('Cache-Control: private', false);
-  header('Pragma: private');
-  header("Expires: 0");
-  $aUsers = exportUsers();
-  $result = getCSVString($aUsers);
-  
-  header('Content-Length: ' . strlen($result)); 
-  //header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-  //
-  echo $result;
-  exit;
-}
+// function downloadCSV(){
+  // header('Content-Description: File Transfer');
+  // header('Content-Type: text/csv');
+  // header('Content-Disposition: attachment; filename="listadosplc.csv"');
+  // // Send Headers: Prevent Caching of File
+  // header('Cache-Control: private', false);
+  // header('Pragma: private');
+  // header("Expires: 0");
+  // $aUsers = exportUsers();
+  // $result = getCSVString($aUsers);
+//   
+  // header('Content-Length: ' . strlen($result)); 
+  // //header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+  // //
+  // echo $result;
+  // exit;
+// }
 
 function exportUsers(){
   $aAll = get_all_registrations(false, false, false);
@@ -468,56 +468,56 @@ function exportUsers(){
   return $aAux;
 }
 
-function getCSVString($aUsers){
- $sCsv = "REGISTRO;SITUACION;APELLIDO - NOMBRE;BADGE NAME;EMAIL;FECHA DE SOLICITUD; TIPO INSCRIPCION; IMPORTE INSCRIPCION;EASY CHAIR ID; EXTRA DINNER;IMPORTE EXTRA DINNER\n";
-  foreach($aUsers as $aUser){
-    $sCsv .= implode($aUser,";")."\n";
-  }
-  return $sCsv;
-}
-
-//DEPRECATED
-function getCSV(){
- $aAll = get_all_registrations(false, false, false);
-  $aAux = array();
-  foreach($aAll as $user){
-    $aCurrent = array();
-    $aCurrent["REGISTRO"] = $user["id"];
-
-    if ($user["paymentmethod"]=="methodtransfer"){
-      $status = "PTE. TRANSFERENCIA";
-    }else{
-      if ($user["paymentdone"]=="1"){
-        $status = "OK. CONFIRMADO";
-      }else{
-        $status = "CANCELADO";
-      }
-    }
-    $aCurrent["SITUACION"] = $status;
-    $aCurrent["APELLIDO - NOMBRE"] = $user["lastname"].", ".$user["firstname"];
-    $aCurrent["BADGE NAME"] = $user["profile"];
-    $aCurrent["EMAIL"] = $user["email"];
-    $aCurrent["FECHA DE SOLICITUD"] = substr($user["time"],0,10);
-    switch ($user["regoption"]){
-      case 1: $registrationtype = "ONLY MONDAY"; break;
-      case 2: $registrationtype = "ONLY TUESDAY"; break;
-      case 3: $registrationtype = "BOTH DAYS"; break;
-      case 4: $registrationtype = "MAIN CONFERENCE"; break;
-      case 5: $registrationtype = "ALL INCLUDED"; break;
-    }
-    $aCurrent["TIPO INSCRIPCION"]     = $registrationtype;
-    $aCurrent["IMPORTE INSCRIPCION"]   = $user["totalamount"];
-    $aCurrent["EASYCHAIR ID"]         = $user["easychairid"];
-    $aCurrent["EXTRA DINNER"]         = $user["extradinner"];
-    $aCurrent["IMPORTE EXTRA DINNER"] = $user["extradinner"]*60;
-    $aAux[] = $aCurrent;
-  }   
-  $sCsv = "REGISTRO;SITUACION;APELLIDO - NOMBRE;BADGE NAME;EMAIL;FECHA DE SOLICITUD; TIPO INSCRIPCION; IMPORTE INSCRIPCION;EASY CHAIR ID; EXTRA DINNER;IMPORTE EXTRA DINNER\n";
-  foreach($aAux as $aUser){
-    $sCsv .= implode($aUser,";")."\n";
-  }
-  return $sCsv;
-}
+// function getCSVString($aUsers){
+ // $sCsv = "REGISTRO;SITUACION;APELLIDO - NOMBRE;BADGE NAME;EMAIL;FECHA DE SOLICITUD; TIPO INSCRIPCION; IMPORTE INSCRIPCION;EASY CHAIR ID; EXTRA DINNER;IMPORTE EXTRA DINNER\n";
+  // foreach($aUsers as $aUser){
+    // $sCsv .= implode($aUser,";")."\n";
+  // }
+  // return $sCsv;
+// }
+// 
+// //DEPRECATED
+// function getCSV(){
+ // $aAll = get_all_registrations(false, false, false);
+  // $aAux = array();
+  // foreach($aAll as $user){
+    // $aCurrent = array();
+    // $aCurrent["REGISTRO"] = $user["id"];
+// 
+    // if ($user["paymentmethod"]=="methodtransfer"){
+      // $status = "PTE. TRANSFERENCIA";
+    // }else{
+      // if ($user["paymentdone"]=="1"){
+        // $status = "OK. CONFIRMADO";
+      // }else{
+        // $status = "CANCELADO";
+      // }
+    // }
+    // $aCurrent["SITUACION"] = $status;
+    // $aCurrent["APELLIDO - NOMBRE"] = $user["lastname"].", ".$user["firstname"];
+    // $aCurrent["BADGE NAME"] = $user["profile"];
+    // $aCurrent["EMAIL"] = $user["email"];
+    // $aCurrent["FECHA DE SOLICITUD"] = substr($user["time"],0,10);
+    // switch ($user["regoption"]){
+      // case 1: $registrationtype = "ONLY MONDAY"; break;
+      // case 2: $registrationtype = "ONLY TUESDAY"; break;
+      // case 3: $registrationtype = "BOTH DAYS"; break;
+      // case 4: $registrationtype = "MAIN CONFERENCE"; break;
+      // case 5: $registrationtype = "ALL INCLUDED"; break;
+    // }
+    // $aCurrent["TIPO INSCRIPCION"]     = $registrationtype;
+    // $aCurrent["IMPORTE INSCRIPCION"]   = $user["totalamount"];
+    // $aCurrent["EASYCHAIR ID"]         = $user["easychairid"];
+    // $aCurrent["EXTRA DINNER"]         = $user["extradinner"];
+    // $aCurrent["IMPORTE EXTRA DINNER"] = $user["extradinner"]*60;
+    // $aAux[] = $aCurrent;
+  // }   
+  // $sCsv = "REGISTRO;SITUACION;APELLIDO - NOMBRE;BADGE NAME;EMAIL;FECHA DE SOLICITUD; TIPO INSCRIPCION; IMPORTE INSCRIPCION;EASY CHAIR ID; EXTRA DINNER;IMPORTE EXTRA DINNER\n";
+  // foreach($aAux as $aUser){
+    // $sCsv .= implode($aUser,";")."\n";
+  // }
+  // return $sCsv;
+// }
 
 
 
