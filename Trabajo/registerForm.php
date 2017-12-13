@@ -290,6 +290,8 @@
 				<div>
 					<input id="boton_crear" type="submit" value="Registrar" />
 				</div>
+				<label for="asterisco" id="asterisco">(*)</label>
+				<label id="campo_obligatorio">Campo obligatorio</label>
 				</fieldset>
 			</form>
 		</main>	

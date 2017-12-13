@@ -7,7 +7,7 @@ fieldset{
 	height: 100%;
 }
 
-#label_name, #label_surname, #label_phone, #label_email, #label_pais, #label_codigo, #asterisco{
+#label_name, #label_surname, #label_phone, #label_email, #label_pais, #label_codigo, #asterisco, #campo_obligatorio{
 	font-size: 22px;
 	font-family: "Estrangelo Edessa";
 }
