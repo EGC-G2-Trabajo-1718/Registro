@@ -3,11 +3,11 @@
 	<head>
 		<title>Registro</title>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0>"
+		<link rel="stylesheet" type="text/css" href="css/registerForm.css" />
 	</head>
 	
 	<!--- Cuerpo del menu principal--->
-	<body >
+	<body>
 		<header>
 			<div class="cabecera">
 				<div ><h1 id="letra_titulo">Registro</h1></div>
@@ -16,32 +16,34 @@
 		
 		<main>
 		<form id="formcheck" action="" method="post"  onsubmit="">
-			
+			<fieldset>
 				<div>
-					<label for="name" id="label_name">Name:</label>
+					<label for="name" id="label_name">Nombre</label>
+					<label for="asterisco" id="asterisco">(*)</label>
 					<input id="name" type="text" name="name"   value="" />
 				</div>
 				
 				<div>
-					<label for="surname" id="label_surname">Surname:</label>
+					<label for="surname" id="label_surname">Apellidos</label>
+					<label for="asterisco" id="asterisco">(*)</label>
 					<input id="surname" type="text"  name="surname"    value=""/>
 				</div>
 				<div>
-					<label for="phone" id="label_phone">Surname:</label>
+					<label for="phone" id="label_phone">Teléfono</label>
 					<input id="phone" type="tel"  name="phone"    value=""/>
 				</div>
 				
 				<div>
-					<label for="email" id="label_email">Email:</label>
+					<label for="email" id="label_email">Email</label>
+					<label for="asterisco" id="asterisco">(*)</label>
 					<input id="email" type="email" name="email"   value="" />
 				</div>
 				
 							
 				<div>
-					<label for="pais" id="label_pais">Pais:</label>
-					<input id="pais" placeholder="pais" name="pais"  type="text" value=""/>		
-					<select name="pais" size="5" >
-						<select name="pais">
+					<label for="pais" id="label_pais">País</label>
+					<label for="asterisco" id="asterisco">(*)</label>
+					<select name="pais" id="pais" size="1">
 							<option value="AF">Afganistán</option>
 							<option value="AL">Albania</option>
 							<option value="DE">Alemania</option>
@@ -280,20 +282,19 @@
 				</div>
 												
 				<div>
-					<label for="codigo" id="label_codigo">Codigo promocional:</label>
-					<input id="codigo" placeholder="Codigo promocional" name="codigo"  type="text" value=""/>		
+					<label for="codigo" id="label_codigo">Código promocional</label>
+					<br />
+					<input id="codigo" placeholder="Código promocional" name="codigo" type="text" value=""/>		
 				</div>
 				
 				<div>
-					<input id="prueba" type="submit" value="Crear" />
-					<input type="reset" value="Reset"/>	
+					<input id="boton_crear" type="submit" value="Registrar" />
 				</div>
-				
+				<label for="asterisco" id="asterisco">(*)</label>
+				<label id="campo_obligatorio">Campo obligatorio</label>
+				</fieldset>
 			</form>
 		</main>	
 		
-		<footer>
-			Proyecto desarrollado por el equipo de Registro de EGC
-		</footer>
 	</body>
 </html>
