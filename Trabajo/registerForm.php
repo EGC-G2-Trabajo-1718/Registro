@@ -4,6 +4,7 @@
 		<title>Registro</title>
 		<meta charset="UTF-8" />
 		<link rel="stylesheet" type="text/css" href="css/registerForm.css" />
+		<script type="text/javascript" src="js/checkForm.js"></script>
 	</head>
 	
 	<!--- Cuerpo del menu principal--->
@@ -288,7 +289,7 @@
 				</div>
 				
 				<div>
-					<input id="boton_crear" type="submit" value="Registrar" />
+					<input id="boton_crear" type="submit" value="Registrar" onclick="checkAll()"/>
 				</div>
 				<label for="asterisco" id="asterisco">(*)</label>
 				<label id="campo_obligatorio">Campo obligatorio</label>

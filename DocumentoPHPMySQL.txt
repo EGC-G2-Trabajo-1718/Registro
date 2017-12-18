@@ -1,0 +1,46 @@
+//// EJEMPLO DE UTILIZACION DE MYSQL EN PHP ////
+//// HAY QUE ELEGIR ENTRE MYSQLI O PDO_MYSQL ////
+/// AQUI CON MYSQLI ////
+
+Conectarse a la base de datos
+$db = mysqli_connect('server', 'login', 'password');
+
+Seleccionar la base de datos
+mysqli_select_db('nombre_de_baso',$db);
+
+Crear una consulta
+$sql = 'SELECT nombre,apellido,ciudad,fecha FROM familia';
+
+Mandar la respuesta o el error
+$req = mysqli_query($db, $sql) or die("ERROR: Could not able to execute $sql. " . mysqli_error($db));
+
+Para cada informacion de la tabla
+while($data = mysqli_fetch_assoc($req))
+    {
+    // Ver las informaciones del resultado
+    echo '<b>'.$data['nombre'].' '.$data['apellido'].'</b> ('.$data['ciudad'].')';
+    echo ' <i>fecha de nacimiento : '.$data['fecha'].'</i><br>';
+    }
+
+Podemos cerrar la conexion con mysql
+mysqli_close();
+
+//// CONSULTAS MYSQL ////
+
+Crear baso de datos
+$sql = "CREATE DATABASE ejemplo";
+
+Crear tabla
+$sql = "CREATE TABLE ejemplo(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(30) NOT NULL
+    )";
+
+Poner algo en la tabla
+$sql = "INSERT INTO ejemplo (nombre) VALUES ('Pedro')";
+
+Consulta de datos en la tabla
+$sql = 'SELECT nombre,apellido,ciudad,fecha FROM familia';
+
+Tener el ultimo id
+$last_id = mysqli_insert_id($db);
