@@ -21,13 +21,13 @@
 				<div>
 					<label for="name" id="label_name">Nombre</label>
 					<label for="asterisco" id="asterisco">(*)</label>
-					<input id="name" type="text" name="name"   value="" />
+					<input id="name" type="text" name="name" required  value="" />
 				</div>
 				
 				<div>
 					<label for="surname" id="label_surname">Apellidos</label>
 					<label for="asterisco" id="asterisco">(*)</label>
-					<input id="surname" type="text"  name="surname"    value=""/>
+					<input id="surname" type="text"  name="surname"  required  value=""/>
 				</div>
 				<div>
 					<label for="phone" id="label_phone">Teléfono</label>
@@ -37,7 +37,7 @@
 				<div>
 					<label for="email" id="label_email">Email</label>
 					<label for="asterisco" id="asterisco">(*)</label>
-					<input id="email" type="email" name="email"   value="" />
+					<input id="email" type="email" name="email" required  value="" />
 				</div>
 				
 							
@@ -285,7 +285,7 @@
 				<div>
 					<label for="codigo" id="label_codigo">Código promocional</label>
 					<br />
-					<input id="codigo" placeholder="Código promocional" name="codigo" type="text" value=""/>		
+					<input id="codigo" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="codigo" type="text" value=""/>		
 				</div>
 				
 				<div>
