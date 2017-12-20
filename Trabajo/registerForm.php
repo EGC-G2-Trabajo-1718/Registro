@@ -20,13 +20,13 @@
 			<fieldset>
 				<div>
 					<label for="name" id="label_name">Nombre</label>
-					<label for="asterisco" id="asterisco">(*)</label>
+					<label for="asterisk" id="asterisk">(*)</label>
 					<input id="name" type="text" name="name" required  value="" />
 				</div>
 				
 				<div>
 					<label for="surname" id="label_surname">Apellidos</label>
-					<label for="asterisco" id="asterisco">(*)</label>
+					<label for="asterisk" id="asterisk">(*)</label>
 					<input id="surname" type="text"  name="surname"  required  value=""/>
 				</div>
 				<div>
@@ -36,15 +36,15 @@
 				
 				<div>
 					<label for="email" id="label_email">Email</label>
-					<label for="asterisco" id="asterisco">(*)</label>
+					<label for="asterisk" id="asterisk">(*)</label>
 					<input id="email" type="email" name="email" required  value="" />
 				</div>
 				
 							
 				<div>
-					<label for="pais" id="label_pais">País</label>
-					<label for="asterisco" id="asterisco">(*)</label>
-					<select name="pais" id="pais" size="1">
+					<label for="country" id="label_country">País</label>
+					<label for="asterisk" id="asterisk">(*)</label>
+					<select name="country" id="pais" size="1">
 							<option value="AF">Afganistán</option>
 							<option value="AL">Albania</option>
 							<option value="DE">Alemania</option>
@@ -283,16 +283,16 @@
 				</div>
 												
 				<div>
-					<label for="codigo" id="label_codigo">Código promocional</label>
+					<label for="code" id="label_code">Código promocional</label>
 					<br />
-					<input id="codigo" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="codigo" type="text" value=""/>		
+					<input id="code" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="code" type="text" value=""/>		
 				</div>
 				
 				<div>
-					<input id="boton_crear" type="submit" value="Registrar" onclick="checkAll()"/>
+					<input id="boton_create" type="submit" value="Registrar" onclick="checkAll()"/>
 				</div>
-				<label for="asterisco" id="asterisco">(*)</label>
-				<label id="campo_obligatorio">Campo obligatorio</label>
+				<label for="asterisk" id="asterisk">(*)</label>
+				<label id="obligatory_field">Campo obligatorio</label>
 				</fieldset>
 			</form>
 		</main>	
