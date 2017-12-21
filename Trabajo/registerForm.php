@@ -44,7 +44,7 @@
 				<div>
 					<label for="country" id="label_country">País</label>
 					<label for="asterisk" id="asterisk">(*)</label>
-					<select name="country" id="pais" size="1">
+					<select name="country" id="country" size="1">
 							<option value="AF">Afganistán</option>
 							<option value="AL">Albania</option>
 							<option value="DE">Alemania</option>

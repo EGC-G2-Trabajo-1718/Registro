@@ -7,7 +7,7 @@ fieldset{
 	height: 100%;
 }
 
-#label_name, #label_surname, #label_phone, #label_email, #label_pais, #label_codigo, #asterisco, #campo_obligatorio{
+#label_name, #label_surname, #label_phone, #label_email, #label_country, #label_code, #asterisk, #obligatory_field{
 	font-size: 22px;
 	font-family: "Estrangelo Edessa";
 }
@@ -17,11 +17,11 @@ option{
 	font-family: "Estrangelo Edessa";
 }
 
-#asterisco{
+#asterisk{
 	color: red;
 }
 
-#name, #surname, #phone, #email, #pais, #codigo{
+#name, #surname, #phone, #email, #country, #code{
 	width: 45%;
 	height: 5%;
 	margin-top: 2%;
@@ -44,11 +44,11 @@ option{
 	margin-left: 7%;
 }
 
-#pais{
+#country{
 	margin-left: 9%;
 }
 
-#boton_crear{
+#boton_create{
 	margin-top: 3%;
 	width: 20%;
 	height: 6%;
