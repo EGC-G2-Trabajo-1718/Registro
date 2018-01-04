@@ -6,13 +6,13 @@ function abrir_conexion() {
 	$database = 'name_database';	
 	
 	global $con;
-    $con = mysqli_connect($host, $user, $password);
-	mysqli_select_db($database, $con);
+    $con = mysql_connect($host, $user, $password);
+	mysql_select_db($database, $con);
       
 }
 
 function cerrar_conexion() {
-	mysqli_close();
+	mysql_close($con);
 }
 
 ?>
