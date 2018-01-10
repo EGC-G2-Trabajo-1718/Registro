@@ -16,7 +16,7 @@
 		</header>
 		
 		<main>
-		<form id="formcheck" action="" method="post"  onsubmit="">
+		<form id="formcheck" action="confirmationForm.php" method="post"  onsubmit="">
 			<fieldset>
 				<div>
 					<label for="name" id="label_name">Nombre</label>
