@@ -16,7 +16,7 @@
 		</header>
 		
 		<main>
-		<form id="formcheck" action="confirmationForm.php" method="post"  onsubmit="">
+		<form id="formcheck" action="confirmationForm.php" method="post"  onsubmit="return checkAll()">
 			<fieldset>
 				<div>
 					<label for="name" id="label_name">Nombre</label>
@@ -283,7 +283,7 @@
 				</div>
 				
 				<div>
-					<input id="boton_create" type="submit" value="Registrar" onclick="checkAll()"/>
+					<input id="boton_create" type="submit" value="Registrar" />
 				</div>
 				<label for="asterisk" id="asterisk">(*)</label>
 				<label id="obligatory_field">Campo obligatorio</label>

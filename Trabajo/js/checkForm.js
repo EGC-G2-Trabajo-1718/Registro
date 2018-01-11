@@ -2,8 +2,8 @@ function checkAll(){
 	var chName = checkName();
 	var chSurname = checkSurname();
 	var chEmail = checkEmail();
-	var chCode = checkCode();
 	var res = "";
+	var resBool = true;
 	if(chName!=""){
 		res += chName + "\n";
 	}
@@ -13,26 +13,25 @@ function checkAll(){
 	if(chEmail!=""){
 		res += chEmail + "\n";
 	}
-	if(chCode!=""){
-		res += chCode + "\n";
-	}
 	
 	if(res!=""){
+		resBool = false;
 		window.alert(res);
 	}
+	return resBool;
 }
 
 function checkEmptyFields(field){
-	if(field==""){
-		return true;
+	if(field.trim()==""){
+		return false;
 	}
+	return true;
 }
 
 function checkName(){
 	var name = document.getElementById("name");
 	var mensaje = "";
-	
-	if(checkEmptyFields(name.value)){
+	if(!checkEmptyFields(name.value)){
 		mensaje = "El campo 'Nombre' es obligatorio";
 	}
 	
@@ -43,7 +42,7 @@ function checkSurname(){
 	var surname = document.getElementById("surname");
 	var mensaje = "";
 	
-	if(checkEmptyFields(surname.value)){
+	if(!checkEmptyFields(surname.value)){
 		mensaje = "El campo 'Apellidos' es obligatorio";
 	}
 	
@@ -55,20 +54,8 @@ function checkEmail(){
 	var email = document.getElementById("email");
 	var mensaje = "";
 	
-	if(checkEmptyFields(email.value)){
+	if(!checkEmptyFields(email.value)){
 		mensaje = "El campo 'Email' es obligatorio";
-	}
-	
-	return mensaje;
-}
-
-function checkCode(){
-	var code = document.getElementById("codigo");
-	var exprCode = /(^$)|(^[aA-zZ]{6}[0-9]{3}$)/;
-	var mensaje = "";
-	
-	if(!exprCode.test(code.value)){
-		mensaje = "El código promocional es incorrecto";
 	}
 	
 	return mensaje;
