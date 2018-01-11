@@ -10,10 +10,8 @@ function user_check($name, $surname, $phone, $email, $country, $code){
 		$check = FALSE;
 	}
 	
-	if($code != ""){
-		if(!preg_match("(^$)|(^[aA-zZ]{6}[0-9]{3}$)", $code)){
-			$check = FALSE;
-		}
+	if(!preg_match("(^$)|(^[aA-zZ]{6}[0-9]{3}$)", $code)){
+		$check = FALSE;
 	}
 	
 	return $check;
@@ -22,10 +20,29 @@ function user_check($name, $surname, $phone, $email, $country, $code){
 
 function user_register($name, $surname, $phone, $email, $country, $code){
 	if(user_check($name, $surname, $phone, $email, $country, $code)){
-		$sql = "INSERT INTO USER(name, surname, phone, email, country, code) VALUES ($name, $surname, $phone, $email, $country, $code)";
+		$id = generate_id();
+		$rdate = get_current_date();
+		$sql = "INSERT INTO USER(id, name, surname, phone, email, country, registrationDate) VALUES (" . $id . ", " . $name . ", " . $surname . ", " . $phone . ", " . $email . ", " . $country . ", " . $rdate . ")";
 		mysql_query($sql);
 	}
 	
+}
+
+function generate_id(){
+	$result = mysql_query('SELECT count(id) FROM USER');
+	$id = $result + 1;
+	return $id;
+}
+
+function get_current_date(){
+	$date = getdate();
+	$day = $date['mday'];
+	$month = $date['mon'];
+	$year = $date['year'];
+	$hours = $date['hours'];
+	$minutes = $date['minutes'];
+	$sdate = $day . "/" . $month . "/" . $year . " " . $hours . ":" . $minutes;
+	return $sdate;
 }
 
 function creditcard_check($ccn, $cvv, $ccyear, $ccmonth  ){
