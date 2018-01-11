@@ -1,7 +1,7 @@
 <!DOCTYPE HTML">
 <html>
 	<head>
-		<script type="text/javascript" src="js/checkDateCreditCard.js"></script>
+		<script type="text/javascript" src="js/checkConfirmationForm.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/confirmationForm.css" />
 		<title>Confirmation form</title>
 		<meta charset="UTF-8" />
@@ -27,7 +27,7 @@
 		<div id="card">
           <label for="card" id="label_card">Tarjeta de Crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="creditcard" pattern="(^$)|(^[0-9]{1}$)" required name="creditcard" type="number" value=""/>	
+          <input id="creditcard" pattern="(^$)|(^[0-9]{16}$)" required name="creditcard" type="number" value=""/>	
           
           <label for="card" id="label_card">Fecha de caducidad de la tarjeta de crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
@@ -38,7 +38,7 @@
           
           <label for="cvv" id="label_cvv">Introduzca CVV de la tarjeta de crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="cvv" pattern="(^$)|(^[0-9]{1}$)" required name="cvv" type="text" value=""/>
+          <input id="cvv" pattern="(^$)|(^[0-9]{3}$)" required name="cvv" type="text" value=""/>
         </div>
           
           <p id="precio"></p>
