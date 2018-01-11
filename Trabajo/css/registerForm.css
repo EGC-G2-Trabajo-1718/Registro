@@ -7,7 +7,7 @@ fieldset{
 	height: 100%;
 }
 
-#label_name, #label_surname, #label_phone, #label_email, #label_country, #label_code, #asterisk, #obligatory_field{
+#label_name, #label_surname, #label_phone, #label_email, #label_country, #asterisk, #obligatory_field{
 	font-size: 22px;
 	font-family: "Estrangelo Edessa";
 }
@@ -21,7 +21,7 @@ option{
 	color: red;
 }
 
-#name, #surname, #phone, #email, #country, #code{
+#name, #surname, #phone, #email, #country{
 	width: 45%;
 	height: 5%;
 	margin-top: 2%;

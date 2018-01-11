@@ -281,12 +281,6 @@
 							<option value="ZW">Zimbabue</option>
 					</select>
 				</div>
-												
-				<div>
-					<label for="code" id="label_code">Código promocional</label>
-					<br />
-					<input id="code" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="code" type="text" value=""/>		
-				</div>
 				
 				<div>
 					<input id="boton_create" type="submit" value="Registrar" onclick="checkAll()"/>

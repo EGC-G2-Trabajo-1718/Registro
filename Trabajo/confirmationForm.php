@@ -1,13 +1,8 @@
 <!DOCTYPE HTML">
 <html>
 	<head>
-		<script>
-			function check(){
-				alert("mal");
-			}
-		</script>
 		<script type="text/javascript" src="js/checkDateCreditCard.js"></script>
-		
+		<link rel="stylesheet" type="text/css" href="css/confirmationForm.css" />
 		<title>Confirmation form</title>
 		<meta charset="UTF-8" />
 	</head>
@@ -25,18 +20,11 @@
       	<h2 id="thanks">Gracias por completar el formulario</h2>
       	<p id="info">Añada su tarjeta de crédito y haga click en Confirmar para finalizar su registro, o bien
       		en Cancelar para volver al formulario de registro</p>
-
-      	<?php
-        	$price = 890;
-
-        	if (isset($_GET['code'])){
-          		echo 'Código promocional aplicado.<br/>';
-          		$price = 0;
-        	}
-          	
-			else{
-          		?>
-          		
+      		
+		<label for="code" id="label_code">Código promocional</label>
+		<input id="code" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="code"
+		onmouseout="activarCodigo()" type="text" value=""/>		
+		<div id="card">
           <label for="card" id="label_card">Tarjeta de Crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
           <input id="creditcard" pattern="(^$)|(^[0-9]{1}$)" required name="creditcard" type="number" value=""/>	
@@ -50,18 +38,14 @@
           
           <label for="cvv" id="label_cvv">Introduzca CVV de la tarjeta de crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="cvv" pattern="(^$)|(^[0-9]{1}$)" required name="cvv" type="text" value=""/>		
+          <input id="cvv" pattern="(^$)|(^[0-9]{1}$)" required name="cvv" type="text" value=""/>
+        </div>
+          
+          <p id="precio"></p>
           
           <label for="asterisk" id="asterisk">(*)</label>
 		  <label id="obligatory_field">Campo obligatorio</label>	
-         
-         <?php
-        	}
-			echo 'El precio total es ' . $price . "€<br/>";
-        	
 
-		?>
-		
           <input type="submit" id="confirm" name="confirm" value="Confirmar">
           
           <input type="button" id="cancel" name="cancel" value="Cancelar" onclick="javascript:location.href='registerForm.php'">
