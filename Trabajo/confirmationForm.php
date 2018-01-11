@@ -22,26 +22,27 @@
       		en Cancelar para volver al formulario de registro</p>
       		
 		<label for="code" id="label_code">Código promocional</label>
-		<input id="code" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="code"
-		onmouseout="activarCodigo()" type="text" value=""/>		
+		<input id="code" placeholder="Código promocional" pattern="(^$)|(^[aA-zZ]{6}[0-9]{3}$)" name="code" type="text" value=""/>		
+		<input id="code_button" type="button" value="Aplicar código" onclick="activarCodigo()"/>
+		
 		<div id="card">
           <label for="card" id="label_card">Tarjeta de Crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="creditcard" pattern="(^$)|(^[0-9]{16}$)" required name="creditcard" type="number" value=""/>	
+          <input id="creditcard" pattern="(^$)|(^[0-9]{16}$)" required maxlength="16" name="creditcard" type="text" value=""/>	
           
           <label for="card" id="label_card">Fecha de caducidad de la tarjeta de crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="monthexpiration" pattern="(^$)|(^(0[1-9]|1[0-2])$)" size="4" required name="monthexpiration" 
+          <input id="monthexpiration" pattern="(^$)|(^(0[1-9]|1[0-2])$)" size="4" required maxlength="2" name="monthexpiration" 
           onClick="if(this.value=='mm')this.value=''" type="text" value="mm">
-          <input id="yearexpiration" pattern="(^$)|(^[0-9]{4}$)" size="5" required name="yearexpiration" 
+          <input id="yearexpiration" pattern="(^$)|(^[0-9]{4}$)" size="5" required maxlength="4" name="yearexpiration" 
           onClick="if(this.value=='aaaa')this.value=''" type="text" value="aaaa">
           
           <label for="cvv" id="label_cvv">Introduzca CVV de la tarjeta de crédito</label>
 		  <label for="asterisk" id="asterisk">(*)</label>		
-          <input id="cvv" pattern="(^$)|(^[0-9]{3}$)" required name="cvv" type="text" value=""/>
+          <input id="cvv" pattern="(^$)|(^[0-9]{3}$)" required maxlength="3" name="cvv" type="text" value=""/>
         </div>
           
-          <p id="precio"></p>
+          <p id="precio">El precio es de 890 €</p>
           
           <label for="asterisk" id="asterisk">(*)</label>
 		  <label id="obligatory_field">Campo obligatorio</label>	
