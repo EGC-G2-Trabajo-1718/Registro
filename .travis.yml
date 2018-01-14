@@ -14,7 +14,7 @@ deploy:
   provider: script
   script: ssh -o StrictHostKeyChecking=no deploy@egc.duckdns.org 'bash -s' < deploy-wordpress-subsistemas.sh Registro
   on:
-branch: master
+    branch: master
 
 notifications:
-	email: false
+  email: false
