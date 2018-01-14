@@ -1,0 +1,31 @@
+h2{
+  font-weight: bold;
+  color: #585858;
+}
+
+p{
+  font-style: italic;
+  color: #585858;
+}
+
+#return{
+  font:bold 13px Arial;
+	background:#298a08;
+	color:#fff;
+	border-radius:2px;
+	border:none;
+	margin-top: 3%;
+	width: 20%;
+	height: 20%;
+	position: relative;
+	left: 10%;
+  text-transform: uppercase;
+}
+
+body{
+  width: 50%;
+  height: 20%;
+	padding: 10px 30px 30px;
+	border: 2px solid #21610b;
+	border-radius: 4px;
+}
