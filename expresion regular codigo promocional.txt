@@ -1,0 +1,7 @@
+1)	\b[A-Z]{6}[0-9]{3}\b
+	Consiste en un conjunto de 6 letras mayúsculas seguidas de 3 números.
+	Por ejemplo:	YAPTYC482 ó AQPCOE946
+
+2)	\b[A-Za-z]{8}\b
+	Consiste en un conjunto simple de 8 letras mayúsculas.
+	Por ejemplo:	APTGDIWY ó PATWICML
