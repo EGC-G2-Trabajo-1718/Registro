@@ -1,0 +1,46 @@
+.cabecera{
+	font-size: 18px;
+}
+
+fieldset{
+	width: 50%;
+	height: 50%;
+}
+
+#thanks, #info{
+  font-size: 22px;
+	font-family: "Estrangelo Edessa";
+}
+
+.precio{
+  font-size: 22px;
+	font-family: "Estrangelo Edessa";
+}
+
+#asterisk{
+	color: red;
+}
+
+#confirm{
+	font:bold 13px Arial;
+	background:#478bf9;
+	color:#fff;
+	border-radius:2px;
+	width:100px;
+	border:none;
+}
+
+#cancel{
+	font:bold 13px Arial;
+	border-radius:2px;
+	width:100px;
+	border:none;
+}
+
+#confirm, #cancel{
+	margin-top: 3%;
+	width: 20%;
+	height: 6%;
+	position: relative;
+	left: 30%;
+}
