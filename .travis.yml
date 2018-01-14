@@ -2,5 +2,19 @@ language: php
 php:
 - '5.5'
 
+before_install:
+  - openssl aes-256-cbc -K $encrypted_4a4ed746c321_key -iv $encrypted_4a4ed746c321_iv -in deploy.enc -out deploy -d
+
+before_deploy:
+  - chmod 600 deploy && mv deploy ~/.ssh/id_rsa
+  - curl -O https://raw.githubusercontent.com/EGC-G2-Trabajo-1718/integracion/master/tools/deploy-wordpress-subsistemas.sh
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: ssh -o StrictHostKeyChecking=no deploy@egc.duckdns.org 'bash -s' < deploy-wordpress-subsistemas.sh Registro
+  on:
+branch: master
+
 notifications:
 	email: false
