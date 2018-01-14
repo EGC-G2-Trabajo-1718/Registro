@@ -1,46 +1,142 @@
+* {
+  box-sizing: border-box;
+}
+
 .cabecera{
 	font-size: 18px;
 }
 
+body {
+	font-family: "Estrangelo Edessa";
+	color: #585858;
+}
+
 fieldset{
-	width: 50%;
-	height: 50%;
+	width: 70%;
+	height: 90%;
 }
 
-#thanks, #info{
-  font-size: 22px;
-	font-family: "Estrangelo Edessa";
+#info{
+	font-style: italic;
 }
 
-.precio{
-  font-size: 22px;
-	font-family: "Estrangelo Edessa";
+#card {
+  width: 360px;
+  height: 300px;
+  margin: 30px auto 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+	padding: 30px 30px 20px;
+}
+
+#creditcard,
+#monthexpiration,
+#yearexpiration,
+#cancel,
+#confirm,
+#cvv{
+  height: 42px;
+}
+
+#creditcard,
+#cvv,
+#monthexpiration,
+#yearexpiration,
+#code{
+    font-size: 14px;
+    font-weight: 100;
+    line-height: 14px;
+}
+
+#creditcard,
+#monthexpiration,
+#yearexpiration,
+#cancel,
+#confirm,
+#cvv,
+#code{
+  color: #86939e;
+  opacity: .7;
+}
+
+#creditcard {
+  width: 100%;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+}
+
+#monthexpiration,
+#yearexpiration {
+  width: 145px;
+  margin-bottom: 20px;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+  background-position: 85% 50%;
+}
+
+#monthexpiration {
+  float: left;
+}
+
+#yearexpiration {
+  float: right;
+}
+
+#cvv{
+  width: 145px;
+  float: left;
+  padding-left: 20px;
+  border: 2px solid #e1e8ee;
+  border-radius: 6px;
+  background: #fff;
+}
+
+#code{
+  width         : 200px;
+  padding-left  : 20px;
+  border        : 2px solid #e1e8ee;
+  border-radius : 6px;
+	font-size: 16px;
+  background    : #fff;
+}
+
+#confirm,
+#cancel{
+  cursor: pointer;
+  width: 15%;
+  border-color: transparent;
+  border-radius: 6px;
+  font-size: 16px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+#confirm{
+  margin-bottom: 10px;
+  background: #7dc855;
+	margin-left: 180px;
+}
+
+#code_button{
+  cursor: pointer;
+  width: 200px;
+  border-color: transparent;
+  border-radius: 6px;
+  font-size: 16px;
+	text-transform: uppercase;
+	color: #fff;
+}
+
+#precio{
+	font-size: 20px;
+	font-weight: bold;
 }
 
 #asterisk{
 	color: red;
-}
-
-#confirm{
-	font:bold 13px Arial;
-	background:#478bf9;
-	color:#fff;
-	border-radius:2px;
-	width:100px;
-	border:none;
-}
-
-#cancel{
-	font:bold 13px Arial;
-	border-radius:2px;
-	width:100px;
-	border:none;
-}
-
-#confirm, #cancel{
-	margin-top: 3%;
-	width: 20%;
-	height: 6%;
-	position: relative;
-	left: 30%;
 }
