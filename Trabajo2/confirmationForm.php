@@ -39,7 +39,7 @@
 				  <input id="monthexpiration" pattern="(^$)|(^(0[1-9]|1[0-2])$)" size="4" required maxlength="2" name="monthexpiration" 
 				  onClick="if(this.value=="mm")this.value=""" type="text" value="mm">
 				  <input id="yearexpiration" pattern="(^$)|(^[0-9]{4}$)" size="5" required maxlength="4" name="yearexpiration" 
-				  onClick="if(this.value=="aaaa")this.value=''" type="text" value="aaaa">
+				  onClick="if(this.value=="aaaa")this.value=" type="text" value="aaaa">
 				  
 				  <label for="cvv" id="label_cvv">Introduzca CVV de la tarjeta de crédito</label>
 				  <label for="asterisk" id="asterisk">(*)</label>		
@@ -62,6 +62,5 @@
 
 		</html>
 		';
-		if(this.value=="mm")this.value=''
 	}
 ?>
