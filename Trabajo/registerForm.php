@@ -40,6 +40,12 @@
 					<input id="email" type="email" name="email" required  value="" />
 				</div>
 				
+				<div>
+					<label for="edad" id="label_edad">Edad</label>
+					<label for="asterisk" id="asterisk">(*)</label>
+					<input id="edad" type="text" name="edad" required  value="" />
+				</div>
+				
 							
 				<div>
 					<label for="country" id="label_country">País</label>
