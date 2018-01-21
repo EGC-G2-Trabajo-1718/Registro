@@ -1,4 +1,3 @@
-
 <?php
 
 function registration_form($registrationinfo, $student = false, $params = array()){
@@ -24,23 +23,23 @@ echo '
 						<div>
 							<label for="name" id="label_name">Nombre</label>
 							<label for="asterisk" id="asterisk">(*)</label>
-							<input id="name" type="text" name="name" required  value= " echo $registrationinfo['nombre']" />
+							<input id="name" type="text" name="name" required  value= "" />
 						</div>
 						
 						<div>
 							<label for="surname" id="label_surname">Apellidos</label>
 							<label for="asterisk" id="asterisk">(*)</label>
-							<input id="surname" type="text"  name="surname"  required  value=" echo $registrationinfo['surname']"/>
+							<input id="surname" type="text"  name="surname"  required  value=""/>
 						</div>
 						<div>
 							<label for="phone" id="label_phone">Teléfono</label>
-							<input id="phone" type="tel"  name="phone"    value=" echo $registrationinfo['phone'] "/>
+							<input id="phone" type="tel"  name="phone"    value=""/>
 						</div>
 						
 						<div>
 							<label for="email" id="label_email">Email</label>
 							<label for="asterisk" id="asterisk">(*)</label>
-							<input id="email" type="email" name="email" required  value=" echo $registrationinfo['email'] " />
+							<input id="email" type="email" name="email" required  value="" />
 						</div>
 						
 									
