@@ -16,7 +16,7 @@ deploy:
   on:
     branch: master
 script:
-- C:/xampp/php ./phpunit
+- ./phpunit --coverage-clover=coverage.xml
 
 notifications:
   email: false
