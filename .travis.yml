@@ -16,7 +16,7 @@ deploy:
   on:
     branch: master
 script:
-- ./phpunit --coverage-clover=coverage.xml
+  - vendor/bin/phpunit
 
 notifications:
   email: false
