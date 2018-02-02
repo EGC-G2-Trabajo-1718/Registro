@@ -16,7 +16,7 @@ deploy:
   on:
     branch: master
 script:
-  - vendor/bin/phpunit
+  - phpunit ./tests/pruebas2
 
 notifications:
   email: false
