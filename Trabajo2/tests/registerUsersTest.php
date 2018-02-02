@@ -4,9 +4,15 @@
 class Tests extends PHPUnit_Framework_TestCase
 {
 	
-    public function test()
+    public function testOne()
     { 
 		$this->checkRegister();
+
+	}
+	
+	 public function testTwo()
+    { 
+		$this->checkEmptyName();
 
 	}
 	
