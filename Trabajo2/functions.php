@@ -1,5 +1,17 @@
 <?php
-
+function user_check($name, $surname, $phone, $email, $country){
+	$check = TRUE;
+	if($name == "" || $surname == "" || $email == ""){
+		$check = FALSE;
+	}
+	
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$check = FALSE;
+	}
+	
+	return $check;
+	
+}
 
 function user_register($name, $surname, $phone, $email, $country, $code){
 	if(user_check($name, $surname, $phone, $email, $country, $code)){
