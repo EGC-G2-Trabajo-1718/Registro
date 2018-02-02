@@ -1,6 +1,6 @@
 <?php
 
-function user_check($name, $surname, $phone, $email, $country, $code){
+function user_check($name, $surname, $phone, $email, $country){
 	$check = TRUE;
 	if($name == "" || $surname == "" || $email == ""){
 		$check = FALSE;
@@ -9,10 +9,6 @@ function user_check($name, $surname, $phone, $email, $country, $code){
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$check = FALSE;
 	}
-
-	if (! preg_match('(^[aA-zZ]{6}[0-9]{3}$)', $code)) {
-            $check = FALSE;
-     }
 	
 	return $check;
 	

@@ -1,31 +1,27 @@
 <?php
-	 include_once('functions.php');
+	 include_once("functions.php");
 
 class Tests extends PHPUnit_Framework_TestCase
 {
 	
-    public function testOne()
+    public function test()
     { 
-		$this->checkRegister();
-
-	}
-	
-	 public function testTwo()
-    { 
-		$this->checkEmptyName();
+		$boo = $this->checkRegister();
+		$this->assertEquals(TRUE,$boo);
 
 	}
 	
 	function checkRegister(){
-		$bool = user_check("name", "surname", "", "email@email.com", "España", "");
+		$bool = user_check("name", "surname", "", "email@email.com", "España");
 		
 		if($bool == TRUE){
 			echo "Successfully registered.";
 		}
+		return $bool;
 	}
 	
 	function checkEmptyName(){
-		$bool = user_check("", "surname", "", "email@email.com", "España", "");
+		$bool = user_check("", "surname", "", "email@email.com", "España");
 		
 		if($bool == FALSE){
 			echo "There is not a name.";
@@ -33,7 +29,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmptySurname(){
-		$bool = user_check("name", "", "", "email@email.com", "España", "");
+		$bool = user_check("name", "", "", "email@email.com", "España");
 		
 		if($bool == FALSE){
 			echo "There is not a surname.";
@@ -41,7 +37,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmptyEmail(){
-		$bool = user_check("name", "surname", "", "", "España", "");
+		$bool = user_check("name", "surname", "", "", "España");
 		
 		if($bool == FALSE){
 			echo "There is not an email.";
@@ -49,18 +45,10 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmail(){
-		$bool = user_check("name", "surname", "", "email", "España", "");
+		$bool = user_check("name", "surname", "", "email", "España");
 		
 		if($bool == FALSE){
 			echo "Incorrect email.";
-		}
-	}
-	
-	function checkCode(){
-		$bool = user_check("name", "surname", "", "email@email.com", "España", "ABCDEF");
-		
-		if($bool == FALSE){
-			echo "Incorrect code.";
 		}
 	}
 }
