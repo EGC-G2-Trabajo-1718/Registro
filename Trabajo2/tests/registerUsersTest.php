@@ -1,5 +1,5 @@
 <?php
-	 include("functions.php");
+	 #include("functions.php");
 
 class Tests extends PHPUnit_Framework_TestCase
 {
@@ -8,12 +8,25 @@ class Tests extends PHPUnit_Framework_TestCase
     { 
 		$boo = $this->checkRegister();
 		$this->assertEquals(TRUE,$boo);
+		echo "-- EXITO --";
 
 	}
+	function user_check($name, $surname, $phone, $email, $country){
+	$check = TRUE;
+	if($name == "" || $surname == "" || $email == ""){
+		$check = FALSE;
+	}
 	
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$check = FALSE;
+	}
+	
+	return $check;
+	
+}
 	
 	function checkRegister(){
-		$bool = user_check("name", "surname", "", "email@email.com", "España");
+		$bool = $this->user_check("name", "surname", "", "email@email.com", "España");
 		
 		if($bool == TRUE){
 			echo "Successfully registered.";
