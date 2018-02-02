@@ -1,30 +1,31 @@
 <?php
 	 include_once("functions.php");
 
-class Tests extends PHPUnit_Framework_TestCase
+class RegisterUsersTest extends PHPUnit_Framework_TestCase
 {
 	
     public function test()
     { 
-$register = 'checkRegister';
-$this->$register();
+		$register = 'checkRegister';
+		$this->$register();
+		
+		$emptyName = 'checkEmptyName';
+		$this->$emptyName();
+		
+		$emptySurname = 'checkEmptySurname';
+		$this->$emptySurname();
+		
+		$emptyEmail = 'checkEmptyEmail';
+		$this->$emptyEmail();
+		
+		$email = 'checkEmail';
+		$this->$email();
+		
+		$code = 'checkCode';
+		$this->$code();
 
-$emptyName = 'checkEmptyName';
-$this->$emptyName();
-
-$emptySurname = 'checkEmptySurname';
-$this->$emptySurname();
-
-$emptyEmail = 'checkEmptyEmail';
-$this->$emptyEmail();
-
-$email = 'checkEmail';
-$this->$email();
-
-$code = 'checkCode';
-$this->$code();
-
-}
+	}
+	
 	function checkRegister(){
 		$bool = user_check("name", "surname", "", "email@email.com", "España", "");
 		
