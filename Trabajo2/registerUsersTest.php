@@ -1,16 +1,34 @@
 <?php
-	 require 'functions.php';
+	 include('functions.php');
 
 class Tests extends PHPUnit_Framework_TestCase
 {
 	
     public function test()
-    { 
-		$boo = $this->checkRegister();
-		$this->assertEquals(TRUE,$boo);
-		echo "-- EXITO --";
+    {
+    	$this->checkRegister(); 
+		#$boo = $this->checkRegister();
+		#$this->assertEquals(TRUE,$boo);
+		$this->checkEmptyName(); 
+		$this->checkEmptySurname(); 
+		$this->checkEmptyEmail(); 
+		$this->checkEmail(); 
 
 	}
+	
+	function user_check($name, $surname, $phone, $email, $country){
+	$check = TRUE;
+	if($name == "" || $surname == "" || $email == ""){
+		$check = FALSE;
+	}
+	
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		$check = FALSE;
+	}
+	
+	return $check;
+	
+}
 	
 	function checkRegister(){
 		$bool = $this->user_check("name", "surname", "", "email@email.com", "España");
@@ -22,7 +40,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmptyName(){
-		$bool = user_check("", "surname", "", "email@email.com", "España");
+		$bool = $this->user_check("", "surname", "", "email@email.com", "España");
 		
 		if($bool == FALSE){
 			echo "There is not a name.";
@@ -30,7 +48,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmptySurname(){
-		$bool = user_check("name", "", "", "email@email.com", "España");
+		$bool = $this->user_check("name", "", "", "email@email.com", "España");
 		
 		if($bool == FALSE){
 			echo "There is not a surname.";
@@ -38,7 +56,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmptyEmail(){
-		$bool = user_check("name", "surname", "", "", "España");
+		$bool = $this->user_check("name", "surname", "", "", "España");
 		
 		if($bool == FALSE){
 			echo "There is not an email.";
@@ -46,7 +64,7 @@ class Tests extends PHPUnit_Framework_TestCase
 	}
 	
 	function checkEmail(){
-		$bool = user_check("name", "surname", "", "email", "España");
+		$bool = $this->user_check("name", "surname", "", "email", "España");
 		
 		if($bool == FALSE){
 			echo "Incorrect email.";
