@@ -26,7 +26,7 @@ class Tests extends PHPUnit_Framework_TestCase
 }
 	
 	function checkRegister(){
-		$bool = user_check("name", "surname", "", "email@email.com", "España");
+		$bool = $this->user_check("name", "surname", "", "email@email.com", "España");
 		
 		if($bool == TRUE){
 			echo "Successfully registered.";
