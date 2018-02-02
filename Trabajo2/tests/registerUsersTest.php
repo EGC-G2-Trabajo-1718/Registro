@@ -6,23 +6,7 @@ class RegisterUsersTest extends PHPUnit_Framework_TestCase
 	
     public function test()
     { 
-		$register = 'checkRegister';
-		$this->$register();
-		
-		$emptyName = 'checkEmptyName';
-		$this->$emptyName();
-		
-		$emptySurname = 'checkEmptySurname';
-		$this->$emptySurname();
-		
-		$emptyEmail = 'checkEmptyEmail';
-		$this->$emptyEmail();
-		
-		$email = 'checkEmail';
-		$this->$email();
-		
-		$code = 'checkCode';
-		$this->$code();
+		$this->checkRegister();
 
 	}
 	
