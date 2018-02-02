@@ -1,7 +1,7 @@
 <?php
 	 include_once("functions.php");
 
-class RegisterUsersTest extends PHPUnit_Framework_TestCase
+class Test extends PHPUnit_Framework_TestCase
 {
 	
     public function test()
