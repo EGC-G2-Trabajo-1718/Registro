@@ -6,13 +6,14 @@ class Tests extends PHPUnit_Framework_TestCase
 	
     public function test()
     {
-    	#$this->checkRegister(); 
-		$boo = $this->checkRegister();
-		$this->assertEquals(TRUE,$boo);
-		#$this->checkEmptyName(); 
-		#$this->checkEmptySurname(); 
-		#$this->checkEmptyEmail(); 
-		#$this->checkEmail(); 
+ 
+		#$boo = $this->checkRegister();
+		#$this->assertEquals(TRUE,$boo);
+		$this->checkRegister(); 
+		$this->checkEmptyName(); 
+		$this->checkEmptySurname(); 
+		$this->checkEmptyEmail(); 
+		$this->checkEmail(); 
 
 	}
 	
