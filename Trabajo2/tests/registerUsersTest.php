@@ -17,13 +17,13 @@ class Tests extends PHPUnit_Framework_TestCase {
 			$check = $check ."Empty name. \n";
 		}
 
-		if ($surname == "") {
+		else if ($surname == "") {
 			$check = $check ."Empty surname. \n";
 		}
-		if ($email == "") {
-			$check = $check ."Empty email.";
-			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-				$check = $check ."Incorrect email. \n";
+		else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$check = $check ."Incorrect email.";
+			if($email==""){
+					$check = $check ."Empty email. \n";
 			}
 		}
 		return $check;
