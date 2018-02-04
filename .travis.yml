@@ -16,7 +16,7 @@ deploy:
   on:
     branch: master
 script:
-- phpunit ./Trabajo2/tests/registerUsersTest
+- phpunit ./Trabajo2/tests/registerCreditCardTest
 
 notifications:
   email: false
