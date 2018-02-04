@@ -1,24 +1,41 @@
 <?php
 
-	
+function user_check($name, $surname, $phone, $email, $country) {
+	$check = "";
+	if ($name == "") {
+		$check = $check . "Empty name. \n";
+	}
 
-function user_register($name, $surname, $phone, $email, $country, $code){
-	if(user_check($name, $surname, $phone, $email, $country, $code)){
+	if ($surname == "") {
+		$check = $check . "Empty surname. \n";
+	}
+	if ($email == "") {
+		$check = $check . "Empty email.";
+		if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$check = $check . "Incorrect email. \n";
+		}
+	}
+	return $check;
+
+}
+
+function user_register($name, $surname, $phone, $email, $country, $code) {
+	if (user_check($name, $surname, $phone, $email, $country, $code)) {
 		$id = generate_id();
 		$rdate = get_current_date();
 		$sql = "INSERT INTO USER(id, name, surname, phone, email, country, registrationDate) VALUES (" . $id . ", " . $name . ", " . $surname . ", " . $phone . ", " . $email . ", " . $country . ", " . $rdate . ")";
 		mysql_query($sql);
 	}
-	
+
 }
 
-function generate_id(){
+function generate_id() {
 	$result = mysql_query('SELECT count(id) FROM USER');
 	$id = $result + 1;
 	return $id;
 }
 
-function get_current_date(){
+function get_current_date() {
 	$date = getdate();
 	$day = $date['mday'];
 	$month = $date['mon'];
@@ -29,58 +46,71 @@ function get_current_date(){
 	return $sdate;
 }
 
-function creditcard_check($ccn, $cvv, $ccyear, $ccmonth  ){
-	$check = TRUE;
-	$pattern_1 = "^[0-9]{16}$";
-	
+function creditcard_check($ccn, $cvv, $ccyear, $ccmonth) {
+	$check = "";
+	$check = $check . $this -> CCN_check($ccn);
+	$check = $check . $this -> CVV_check($cvv);
+	$check = $check . $this -> date_check($ccyear, $ccmonth);
+
+	return $check;
+}
+
+function CCN_check($ccn) {
+	$check = "";
+	$pattern_1 = "(^[0-9]{16}$)";
+
 	//Comprobacion de que el numero de la tarjeta cumpla el pattern
-	
-	if(preg_match($pattern_1, $ccn)  ){
-		$check =TRUE;
-	}else{
-		$check = FALSE;
+
+	if (preg_match($pattern_1, $ccn)) {
+		$check = $check . "Correct card number. \n";
+	} else if (!preg_match($pattern_1, $ccn)) {
+		$check = $check . "Incorrect card number. \n";
 	}
-	
-	//Comprobacion de que el CVV sean tres digitos
-	
-	if(strlen($cvv) != 3 || $ccdate == ""){
-		$check = FALSE;
+	return $check;
+}
+
+function CVV_check($cvv) {
+	$check = "";
+	if (strlen($cvv == "")) {
+		$check = $check . "Empty CVV. \n";
+	} else if (strlen($cvv) != 3) {
+		$check = $check . "Incorrect CVV. \n";
+	} else if (!preg_match("(^[0-9]{3}$)", $cvv)) {
+		$check = $check . "The CVV must be 3 digits. \n";
+	} else {
+		$check = $check . "Correct CVV. \n";
 	}
-	else{
-		if(!preg_match("^[0-9]{3}$", $cvv)){
-			$check = FALSE;
+	return $check;
+}
+
+function date_check($ccyear, $ccmonth) {
+	$check = "";
+	if (!preg_match('(^[0-9]{4}$)', $ccyear)) {
+		$check = $check . "Incorrect year. \n";
+	} else if (!preg_match('(^(0[1-9]|1[0-2])$)', $ccmonth)) {
+		$check = $check . "Incorrect month. \n";
+	}
+
+	// past date
+	else if ($ccyear < date('Y') || $ccyear == date('Y') && $ccmonth < date('m')) {
+		$check = $check . "The date can not be earlier than the current date. \n";
+	} else {
+		$check = $check . "Correct date. \n";
+	}
+	return $check;
+}
+
+function code_promotional($code, $ccn, $cvv, $ccyear, $ccmonth) {
+	$check = "All is correct.";
+
+	if (preg_match('(^[aA-zZ]{6}[0-9]{3}$)', $code)) {
+		if ($ccn != "" || $cvv != "" || $ccyear != "" || $ccmonth != "") {
+			$check = "Error. When the code is correct, there should be no more parameters.";
 		}
+	} else {
+		$check = "Code incorrect.";
 	}
-	
-	// Comprobacion de fechas
-	
-	$ccmonth = str_pad($ccmonth, 2, '0', STR_PAD_LEFT);
-	
-    if (! preg_match('/^20\d\d$/', $ccyear)) {
-           $check = FALSE;
-     }
-    if (! preg_match('/^(0[1-9]|1[0-2])$/', $ccmonth)) {
-            $check = FALSE;
-     }
-        // past date
-    if ($ccyear < date('Y') || $ccyear == date('Y') && $ccmonth < date('m')) {
-            $check = FALSE;
-     }	
-	
-	
+
 	return $check;
 }
-
-function code_promotional($code , $ccn, $cvv, $ccyear, $ccmonth ){
-	$check = FALSE;
-	
-	if(preg_match('(^$)|(^[aA-zZ]{6}[0-9]{3}$)', $code)){
-			if($ccn == "" || $cvv == "" || $ccyear == "" || $ccmonth == ""){
-				$check = TRUE;
-			}
-	}
-	
-	return $check;
-}
-
 ?>
