@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;EGC- Registro/pie.php&apos;" deleteContents="false" description="Delete resource &apos;EGC- Registro/pie.php&apos;" element1="/EGC- Registro/pie.php" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1513000460374"/>&#x0A;<refactoring comment="Delete resource &apos;EGC- Registro/cabecera.php&apos;" deleteContents="false" description="Delete resource &apos;EGC- Registro/cabecera.php&apos;" element1="/EGC- Registro/cabecera.php" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1513000464944"/>
-</session>
