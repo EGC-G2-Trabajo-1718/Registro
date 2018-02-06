@@ -1,5 +1,26 @@
 <?php
 
+function database_user_table() {
+ 
+  global $wpdb;
+  $nombreTabla = "USER";
+  
+  $created = dbDelta(  
+    "CREATE TABLE $nombreTabla (
+      ID bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+      name varchar(20) NOT NULL DEFAULT '',
+      surname varchar(20) NOT NULL DEFAULT '',
+      phone varchar(10) NOT NULL DEFAULT '',
+      email varchar(30) NOT NULL DEFAULT '',
+      country varchar(20) NOT NULL DEFAULT '',
+      registrationDate varchar(20) NOT NULL DEFAULT '',
+      PRIMARY KEY (ID),
+      KEY email (email)
+    ) CHARACTER SET utf8 COLLATE utf8_general_ci;"
+  );
+} 
+register_activation_hook( __FILE__, 'database_user_table' );
+
 function user_check($name, $surname, $phone, $email, $country) {
 	$check = "";
 	if ($name == "") {
@@ -19,20 +40,21 @@ function user_check($name, $surname, $phone, $email, $country) {
 
 }
 
-function user_register($name, $surname, $phone, $email, $country, $code) {
-	if (user_check($name, $surname, $phone, $email, $country, $code)) {
-		$id = generate_id();
+function user_register($name, $surname, $phone, $email, $country){
+	if(user_check($name, $surname, $phone, $email, $country)){
 		$rdate = get_current_date();
-		$sql = "INSERT INTO USER(id, name, surname, phone, email, country, registrationDate) VALUES (" . $id . ", " . $name . ", " . $surname . ", " . $phone . ", " . $email . ", " . $country . ", " . $rdate . ")";
-		mysql_query($sql);
+		global $wpdb;
+		$wpdb->insert( 'USER',
+				array(
+				     'name' => $name,
+				     'surname' => $surname,
+				     'phone' => $phone,
+				     'email' => $email,
+				     'country' => $country,
+				     'registrationDate' => $rdate));
+
 	}
-
-}
-
-function generate_id() {
-	$result = mysql_query('SELECT count(id) FROM USER');
-	$id = $result + 1;
-	return $id;
+	
 }
 
 function get_current_date() {

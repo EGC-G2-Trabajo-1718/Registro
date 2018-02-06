@@ -1,9 +1,9 @@
 <?php
 function abrir_conexion() {
 	$host = 'host';
-	$user = 'user';
+	$user = 'egcRegistro';
 	$password = 'password';
-	$database = 'name_database';	
+	$database = 'registro';	
 	
 	global $con;
     $con = mysql_connect($host, $user, $password);
