@@ -1,0 +1,57 @@
+.cabecera{
+	font-size: 18px;
+}
+
+fieldset{
+	width: 50%;
+	height: 100%;
+}
+
+#label_name, #label_surname, #label_phone, #label_email, #label_country, #asterisk, #obligatory_field{
+	font-size: 22px;
+	font-family: "Estrangelo Edessa";
+}
+
+option{
+	font-size: 22px;
+	font-family: "Estrangelo Edessa";
+}
+
+#asterisk{
+	color: red;
+}
+
+#name, #surname, #phone, #email, #country{
+	width: 45%;
+	height: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+#name{
+	margin-left: 3%;
+}
+
+#surname{
+	margin-left: 1.7%;
+}
+
+#phone{
+	margin-left: 6.2%;
+}
+
+#email{
+	margin-left: 7%;
+}
+
+#country{
+	margin-left: 9%;
+}
+
+#boton_create{
+	margin-top: 3%;
+	width: 20%;
+	height: 6%;
+	position: relative;
+	left: 37%;
+}
